@@ -1,6 +1,3 @@
-from operator import concat
-
-
 class Solution:
     s = ""
     characters = {
@@ -27,7 +24,7 @@ class Solution:
             if count != len(self.s):
                 print("Only 'I', 'V', 'X', 'L', 'C', 'D', 'M' allowed.")
                 self.s = input("Input: s = ")
-            else:
+            if len(self.s) > 1 and len(self.s) < 15 and count == len(self.s):
                 break
 
     def romanToInt(self) -> int:
@@ -50,7 +47,7 @@ class Solution:
                             characters_used[letter] = characters_used.get(letter, 0) + value
                     else:
                         characters_used[letter] = characters_used.get(letter, 0) + value
-        print(characters_used)
+        # print(characters_used)
 
         # for input_index, input_letter in enumerate(self.s):
         #     for letter, value in self.characters.items():
@@ -60,18 +57,21 @@ class Solution:
         #                 characters_used[letter] = 1
         #             else:
         #                 characters_used[letter] += 1
-        # total_value = 0
-        # for letter, count in characters_used.items():
-        #     for letter_fixed, value in self.characters.items():
-        #         if letter == letter_fixed:
-        #             total_value += value * count
+        total_value = 0
+        for letter, count in characters_used.items():
+            # for letter_fixed, value in self.characters.items():
+            #     if letter == letter_fixed:
+            total_value += count
 
-        # print(f"Output: {total_value}")
-        # print("Explanation: ", end="")
-        # for letter, count in characters_used.items():
-        #     print(f"{letter} = {count * self.characters[letter]}, ", end="")
-        # print("\n")
-        return True
+        print(f"Output: {total_value}")
+        print("Explanation: ", end="")
+        for letter, count in characters_used.items():
+            if letter == list(characters_used)[-1]:
+                print(f"{letter} = {count}. ", end="")
+            else:
+                print(f"{letter} = {count}, ", end="")
+        print("\n")
+        # return True
 
 test = Solution()
 test.romanToInt()
