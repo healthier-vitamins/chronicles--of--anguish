@@ -42,7 +42,7 @@ class Solution:
                     if input_index + 1 != len(self.s):
                         if value < self.characters[self.s[input_index + 1].upper()]:
                             concatenated_roman = letter + self.s[input_index + 1].upper()
-                            updated_value = self.characters[self.s[input_index+1].upper()] - value
+                            updated_value = self.characters[self.s[input_index + 1].upper()] - value
                             characters_used[concatenated_roman] = characters_used.get(concatenated_roman, 0) + updated_value
                             is_concatenated = True
                             continue
