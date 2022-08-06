@@ -1,5 +1,4 @@
 class Solution:
-    s = ""
     characters = {
         "I": 1,
         "V": 5,
@@ -10,21 +9,24 @@ class Solution:
         "M": 1000
     }
     def __init__(self):
-        self.s = input("Input: s = ")
+        s = input("Input: s = ")
         while(True):
-            if len(self.s) <= 1 or len(self.s) >= 15:
+            if len(s) <= 1 or len(s) >= 15:
                 print("Not less than 1 or more than 15")
-                self.s = input("Input: s = ")
+                s = input("Input: s = ")
+
             characters = ['I', 'V', 'X', 'L', 'C', 'D', 'M']
             count = 0
-            for letter in self.s:
+            for letter in s:
                 for character in characters:
                     if letter.upper() == character:
                         count += 1
-            if count != len(self.s):
+            if count != len(s):
                 print("Only 'I', 'V', 'X', 'L', 'C', 'D', 'M' allowed.")
-                self.s = input("Input: s = ")
-            if len(self.s) > 1 and len(self.s) < 15 and count == len(self.s):
+                s = input("Input: s = ")
+
+            if len(s) > 1 and len(s) < 15 and count == len(s):
+                self.s = s
                 break
 
     def romanToInt(self) -> int:
@@ -47,20 +49,8 @@ class Solution:
                             characters_used[letter] = characters_used.get(letter, 0) + value
                     else:
                         characters_used[letter] = characters_used.get(letter, 0) + value
-        # print(characters_used)
-
-        # for input_index, input_letter in enumerate(self.s):
-        #     for letter, value in self.characters.items():
-        #         if input_letter.upper() == letter:
-        #             # characters_used[letter] = characters_used.get(letter, 0) + 1
-        #             if letter not in characters_used:
-        #                 characters_used[letter] = 1
-        #             else:
-        #                 characters_used[letter] += 1
         total_value = 0
         for letter, count in characters_used.items():
-            # for letter_fixed, value in self.characters.items():
-            #     if letter == letter_fixed:
             total_value += count
 
         print(f"Output: {total_value}")
@@ -71,9 +61,10 @@ class Solution:
             else:
                 print(f"{letter} = {count}, ", end="")
         print("\n")
-        # return True
+        return True
 
 test = Solution()
 test.romanToInt()
 
 # https://leetcode.com/problems/roman-to-integer/
+
