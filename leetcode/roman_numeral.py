@@ -30,7 +30,7 @@ class Solution:
                 break
 
     def romanToInt(self) -> int:
-        characters_used = {}
+        romans_used = {}
         is_concatenated = False
         for input_index, input_letter in enumerate(self.s):
             if is_concatenated == True:
@@ -42,21 +42,21 @@ class Solution:
                         if value < self.characters[self.s[input_index + 1].upper()]:
                             concatenated_roman = letter + self.s[input_index + 1].upper()
                             updated_value = self.characters[self.s[input_index + 1].upper()] - value
-                            characters_used[concatenated_roman] = characters_used.get(concatenated_roman, 0) + updated_value
+                            romans_used[concatenated_roman] = romans_used.get(concatenated_roman, 0) + updated_value
                             is_concatenated = True
                             continue
                         else:
-                            characters_used[letter] = characters_used.get(letter, 0) + value
+                            romans_used[letter] = romans_used.get(letter, 0) + value
                     else:
-                        characters_used[letter] = characters_used.get(letter, 0) + value
+                        romans_used[letter] = romans_used.get(letter, 0) + value
         total_value = 0
-        for letter, count in characters_used.items():
+        for letter, count in romans_used.items():
             total_value += count
 
         print(f"Output: {total_value}")
         print("Explanation: ", end="")
-        for letter, count in characters_used.items():
-            if letter == list(characters_used)[-1]:
+        for letter, count in romans_used.items():
+            if letter == list(romans_used)[-1]:
                 print(f"{letter} = {count}. ", end="")
             else:
                 print(f"{letter} = {count}, ", end="")
