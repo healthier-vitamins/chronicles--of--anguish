@@ -1,43 +1,47 @@
 picture = ["aabba", "aabba", "aaacb"]
 
+
+
 def strokesRequired(picture):
-    no_of_fill = 0
-    letters = ["a", "b" ,"c"]
-
-    # populate is_filled array based on picture's 2d array
-    is_filled = []
-    for i in range(len(picture)):
-        col = []
-        for j in range(len(picture[i])):
-            col.append(0)
-        is_filled.append(col)
-
+    # Write your code here
+    letters = ['a', 'b', 'c']
     p = 0
-    while p != len(letters) - 1:
-        for i, h in enumerate(picture):
-            for j, w in enumerate(h):
-                max_length = len(h)
-                if j + 1 != max_length:
-                    if h[j + 1] == h[j] and w == letters[p]:
-                        is_filled[i][j] = 1
-                        is_filled[i][j + 1] = 1
+    strokes = 0
+    attempt = []
+    for i in picture:
+        attempt.append(list(i))
+    hit = 0
+            
+    while p != len(letters):
+        for i, word in enumerate(picture):
+            for j, letter in enumerate(word):
+                if j != len(word) - 1:
+                    if word[j + 1] == letter and letters[p] == letter:
+                        attempt[i][j] = 1
+                        attempt[i][j + 1] = 1
                 else:
-                    if h[j] == h[max_length - 1] and w == letters[p]:
-                        is_filled[i][max_length - 1] = 1
-                        is_filled[i][j] = 1
-        # swap j and i
-        for j in range(0, len(picture[0])):
-            for i, h in enumerate(picture):
-                if i + 1 != len(picture):
-                    if picture[i + 1][j] == picture[i][j] and picture[i][j] == letters[p]:
-                        is_filled[i][j] = 1
-                        is_filled[i + 1][j] = 1
+                    if letter == word[len(word) - 1]:
+                        attempt[i][j] = 1
+        print(f"before: {attempt}")
+        for j in range(len(picture[0])):
+            for i, word in enumerate(picture):
+                if i != len(picture) - 1:
+                    if picture[i][j] == picture[i + 1][j] and picture[i][j] == letters[p]:
+                        attempt[i][j] = 1
+                        attempt[i + 1][j] = 1
                 else:
+                    # test i with max case
                     if picture[i][j] == picture[len(picture) - 1][j] and picture[i][j] == letters[p]:
-                        is_filled[i][j] = 1
-                        is_filled[len(picture) - 1][j] = 1
-        p += 1
-        no_of_fill += 1
-    return is_filled, no_of_fill
+                        attempt[i][j] = 1
+        strokes += 1
+        print(attempt)
+        incomplete = False
+        for i in range(len(attempt)):
+            if letters[p] in attempt[i]:
+                incomplete = True
+                break
+        if incomplete == False:
+            p += 1
+    return(strokes)
 print(strokesRequired(picture))
 
